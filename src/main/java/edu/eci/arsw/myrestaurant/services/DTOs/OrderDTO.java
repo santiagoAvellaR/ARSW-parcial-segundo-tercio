@@ -5,7 +5,7 @@ import edu.eci.arsw.myrestaurant.model.Order;
 import java.util.Map;
 
 
-public class OrderDTO {
+public class OrderDTO{
     private int tableNumber;
 
     private int total;

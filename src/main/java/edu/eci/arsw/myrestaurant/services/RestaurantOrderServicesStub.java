@@ -55,11 +55,11 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
     public List<OrderDTO> getAllOrders() throws OrderServicesException {
         List<OrderDTO> orderDTOS = new ArrayList<>();
             System.out.println("buscando " + Arrays.toString(tableOrders.keySet().toArray(new Integer[0])));
-            for (Integer orderNumber : tableOrders.keySet().toArray(new Integer[0])) {
+            for (Object orderNumber : tableOrders.keySet().toArray()) {
                 System.out.println(orderNumber);
-                Order order = tableOrders.get(orderNumber);
+                Order order = tableOrders.get((int)orderNumber);
                 System.out.println(order.toString());
-                orderDTOS.add(new OrderDTO(order.getTableNumber(), calculateTableBill(orderNumber), order.getOrderAmountsMap()));
+                orderDTOS.add(new OrderDTO(order.getTableNumber(), calculateTableBill((int)orderNumber), order.getOrderAmountsMap()));
             }
             return orderDTOS;
     }
