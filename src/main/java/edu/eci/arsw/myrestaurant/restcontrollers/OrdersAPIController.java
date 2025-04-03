@@ -19,22 +19,42 @@ package edu.eci.arsw.myrestaurant.restcontrollers;
 import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.ProductType;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
+import edu.eci.arsw.myrestaurant.services.DTOs.OrderDTO;
+import edu.eci.arsw.myrestaurant.services.OrderServicesException;
+import edu.eci.arsw.myrestaurant.services.RestaurantOrderServices;
 import edu.eci.arsw.myrestaurant.services.RestaurantOrderServicesStub;
+
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
  * @author hcadavid
  */
+@RestController
+@RequestMapping("/restaurant")
 public class OrdersAPIController {
 
-    
+    @Autowired
+    private RestaurantOrderServices restaurantOrderServices;
+
+    @RequestMapping(value = "/orders", method = RequestMethod.GET)
+    public ResponseEntity<?> getOrders() {
+        try {
+            System.out.println("controlador");
+            return new ResponseEntity<>(restaurantOrderServices.getAllOrders(), HttpStatus.FOUND);
+        } catch (OrderServicesException e) {
+            System.out.println("error en controlador");
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
