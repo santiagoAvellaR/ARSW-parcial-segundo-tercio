@@ -61,6 +61,7 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
                 System.out.println(order.toString());
                 orderDTOS.add(new OrderDTO(order.getTableNumber(), calculateTableBill((int)orderNumber), order.getOrderAmountsMap()));
             }
+            System.out.println(orderDTOS);
             return orderDTOS;
     }
 

@@ -49,13 +49,13 @@ public class OrdersAPIController {
     private RestaurantOrderServices restaurantOrderServices;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public ResponseEntity<?> getOrders() {
+    public List<OrderDTO> getOrders() {
         try {
             System.out.println("controlador");
-            return new ResponseEntity<>(restaurantOrderServices.getAllOrders(), HttpStatus.FOUND);
+            return restaurantOrderServices.getAllOrders();
         } catch (OrderServicesException e) {
             System.out.println("error en controlador");
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return null;
         }
     }
 
